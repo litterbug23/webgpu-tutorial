@@ -191,6 +191,43 @@ Github：https://github.com/puxiao
 2. 若你想转发我的文章，请先告诉我，我希望至少你能注明文章来源和作者。
 
 
+```cpp
+#include "RHIInstance.h"
+#include "RHIAdapter.h"
+#include "RHIDevice.h"
+
+//rhi api root entry point
+IRHIInstance* pInstance = ugsGetInstance("dx12");
+
+//get a beset performance apdater (physical device)
+RHIAdapterPtr pAdapter = pInstance-> GetBestPerformanceAdapter();
+
+//create a logical device
+RHIDevicePtr pDevice = pAdapter->CreateDevice( RHIDeviceDesc() );
+
+
+```
+
+```cpp
+#include "RHIInstance.h"
+
+//rhi api root entry point
+IRHIInstance* pInstance = ugsGetInstance("dx12");
+
+HWND hwnd = externalHwnd;
+WindowHandle windowHandle = WindowHandle::FromeHwnd((void*)hwnd,nullptr);
+
+RHISurfacePtr pSurface = pInstance->CreatSurface( RHISurfaceDesc{windowHandle});
+
+RHISwapChainDesc swapChainDesc;
+swapChainDesc.width = 1024;
+swapChainDesc.height = 768;
+swapChainDesc
+RHISwapChainPtr pSwapChain = pDevice->CreateSwapChain(pSurface, RHISwapChainDesc { 1024,768} );
+
+```
+
+
 
 <br>
 
